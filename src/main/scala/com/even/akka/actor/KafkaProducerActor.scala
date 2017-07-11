@@ -2,7 +2,7 @@ package com.even.akka.actor
 
 import akka.actor.Actor
 import akka.event.Logging
-import com.even.akka.api.MsgDto
+import com.even.akka.route.MsgDto
 import com.even.akka.util.KafkaProducerUtil
 
 /**

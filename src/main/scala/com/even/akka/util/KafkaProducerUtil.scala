@@ -2,7 +2,7 @@ package com.even.akka.util
 
 import java.util.Properties
 
-import com.even.akka.api.MsgDto
+import com.even.akka.route.MsgDto
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.slf4j.LoggerFactory
 
@@ -28,11 +28,15 @@ object KafkaProducerUtil {
     *用于向kafka中发送消息
     * @param msgDto
     */
-  def send(msgDto: MsgDto): Unit ={
-    try kafkaProducer.send(new ProducerRecord[String,String](msgDto.topic,msgDto.content))
+  def send(msgDto: MsgDto):String={
+    try {
+      kafkaProducer.send(new ProducerRecord[String,String](msgDto.topic,msgDto.content))
     log.info(s"msg send success $msgDto")
+      "success"
+    }
     catch {
-      case e : Exception => log.error(e.getMessage,e)
+      case e : Exception => {log.error(e.getMessage,e)
+        "error"}
     }
   }
 }
